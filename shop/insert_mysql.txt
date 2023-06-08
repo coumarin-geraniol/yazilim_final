@@ -1,0 +1,525 @@
+-- Adminer 4.8.1 MySQL 8.0.33 dump
+
+SET NAMES utf8;
+SET time_zone = '+0000';
+SET foreign_key_checks = 0;
+SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
+
+SET NAMES utf8mb4;
+
+DROP TABLE IF EXISTS `buyers`;
+CREATE TABLE `buyers` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '-',
+  `surname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '-',
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '-',
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '-',
+  `country` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `buyer_user_idx` (`user_id`),
+  CONSTRAINT `buyers_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `buyers` (`id`, `name`, `surname`, `phone`, `address`, `country`, `user_id`, `created_at`, `updated_at`) VALUES
+(1,	'-',	'-',	'-',	'-',	'',	2,	'2023-06-07 140935',	'2023-06-07 140935'),
+(2,	'Ali',	'Demir',	'5551112222',	'İstanbul, Türkiye',	'',	2,	'2023-06-07 142615',	'2023-06-07 142615'),
+(3,	'Ayşe',	'Yılmaz',	'5553334444',	'Ankara, Türkiye',	'',	10,	'2023-06-07 142615',	'2023-06-07 142615'),
+(4,	'Mehmet',	'Kara',	'5555555555',	'İzmir, Türkiye',	'',	12,	'2023-06-07 142615',	'2023-06-07 142615'),
+(5,	'SEMAKHAT',	'AZAMATKHUJAEVA',	'5318204598',	'Ziraat Mahallesi, Ayçe Sokak, No4 - AltındağANKARA',	'Ankara',	15,	'2023-06-07 205117',	'2023-06-07 205117'),
+(6,	'SEMAKHAT',	'AZAMATKHUJAEVA',	'5318204598',	'Ziraat Mahallesi, Ayçe Sokak, No4 - AltındağANKARA',	'Ankara',	16,	'2023-06-07 205259',	'2023-06-07 205259'),
+(7,	'SEMAKHAT',	'AZAMATKHUJAEVA',	'5318204598',	'Ziraat Mahallesi, Ayçe Sokak, No4 - AltındağANKARA',	'Ankara',	17,	'2023-06-07 205651',	'2023-06-07 205651'),
+(8,	'SEMAKHAT',	'AZAMATKHUJAEVA',	'5318204598',	'Ziraat Mahallesi, Ayçe Sokak, No4 - AltındağANKARA',	'Ankara',	18,	'2023-06-07 210119',	'2023-06-07 210119'),
+(9,	'SEMAKHAT',	'AZAMATKHUJAEVA',	'5318204598',	'Ziraat Mahallesi, Ayçe Sokak, No4 - AltındağANKARA',	'Ankara',	19,	'2023-06-07 210657',	'2023-06-07 210657'),
+(10,	'SEMAKHAT',	'AZAMATKHUJAEVA',	'5318204598',	'Ziraat Mahallesi, Ayçe Sokak, No4 - AltındağANKARA',	'Ankara',	20,	'2023-06-07 211003',	'2023-06-07 211003'),
+(11,	'SEMAKHAT',	'AZAMATKHUJAEVA',	'05318204598',	'Ziraat Mahallesi, Ayçe Sokak, No4 - AltındağANKARA',	'Ankara',	21,	'2023-06-07 211148',	'2023-06-07 211148'),
+(12,	'SEMAKHAT',	'AZAMATKHUJAEVA',	'05318204598',	'Ziraat Mahallesi, Ayçe Sokak, No4 - AltındağANKARA',	'Ankara',	22,	'2023-06-07 212900',	'2023-06-07 212900');
+
+DROP TABLE IF EXISTS `categories`;
+CREATE TABLE `categories` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `categories` (`id`, `title`, `created_at`, `updated_at`) VALUES
+(1,	'İnşaat Malzemeleri',	NULL,	NULL),
+(2,	'Boya ve Kaplama',	NULL,	NULL),
+(3,	'Elektrik ve Aydınlatma',	NULL,	NULL),
+(4,	'Hırdavat',	NULL,	NULL),
+(5,	'Yapı Kimyasalları',	NULL,	NULL),
+(6,	'Bahçe ve Peyzaj',	NULL,	NULL),
+(7,	'Yalıtım',	NULL,	NULL),
+(8,	'Marangozluk',	NULL,	NULL),
+(9,	'Su ve Sıhhi Tesisat',	NULL,	NULL),
+(10,	'Çatı ve Cephe',	NULL,	NULL),
+(11,	'Zemin Kaplamaları',	NULL,	NULL),
+(12,	'Araç Gereçler',	NULL,	NULL),
+(13,	'İnşaat Ekipmanları',	NULL,	NULL),
+(14,	'İş Güvenliği',	NULL,	NULL),
+(15,	'Mobilya ve Dekorasyon',	NULL,	NULL);
+
+DROP TABLE IF EXISTS `colors`;
+CREATE TABLE `colors` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+DROP TABLE IF EXISTS `failed_jobs`;
+CREATE TABLE `failed_jobs` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+DROP TABLE IF EXISTS `images`;
+CREATE TABLE `images` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `path` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `item_id` bigint unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `image_item_idx` (`item_id`),
+  CONSTRAINT `images_item_id_foreign` FOREIGN KEY (`item_id`) REFERENCES `items` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `images` (`id`, `path`, `created_at`, `updated_at`, `item_id`) VALUES
+(7,	'images7d5exRFuSj72SPAWUGffJdNsbr9Bkj1jN9gdMHEt.jpg',	'2023-06-07 153734',	'2023-06-07 153734',	97),
+(8,	'imageshXVKEKfmyzz8qIV2UNs7CTNUUrlgy5bpozyIDtwm.jpg',	'2023-06-07 153734',	'2023-06-07 153734',	97),
+(9,	'imagesTxXEN9EkzSA7fPSVerP4Kcio0ha2EC4WvkBWcX3V.jpg',	'2023-06-07 153734',	'2023-06-07 153734',	97),
+(10,	'imagesuTeQ7idnVmUg2OIu0KREMKPj2z3VHNyidW4c52Bz.jpg',	'2023-06-07 153744',	'2023-06-07 153744',	98),
+(11,	'imagesehRRvRa4c38By7LaFdpBD6STylMXbuzOYjIDaETH.jpg',	'2023-06-07 153744',	'2023-06-07 153744',	98),
+(12,	'imagesV3J6c0C2L5iBzeWrgu6Gyak59CHfI4DoARpElChN.jpg',	'2023-06-07 153744',	'2023-06-07 153744',	98),
+(13,	'imagesIr4H6EYSoqqKKvTHzafLlryjFahX0VFXq92bORrb.jpg',	'2023-06-07 153759',	'2023-06-07 153759',	99),
+(14,	'imagesVQy7z94ejGUA0HCe07I4URSH7fT9mzMDrZlMHf11.jpg',	'2023-06-07 153759',	'2023-06-07 153759',	99),
+(15,	'imagesbFfAwDYIYCkmLIB6ZCkyjvzaGUGN6o8qpvkAROTs.jpg',	'2023-06-07 153759',	'2023-06-07 153759',	99),
+(16,	'imagesPDIYFjIPfJ0obbmkGc13IKkUuLVcA6r5PUhClU57.jpg',	'2023-06-07 153812',	'2023-06-07 153812',	100),
+(17,	'imagesMP8vDR2g1pP60K0sHQUz9eFwhEFZzYRwnxXVVjL0.jpg',	'2023-06-07 153812',	'2023-06-07 153812',	100),
+(18,	'imagesJo35Mh9YCtXcSeFB6kbtcHC6uIodXyCuvphxeTKa.jpg',	'2023-06-07 153812',	'2023-06-07 153812',	100),
+(19,	'imagesT6IEanfupzQMvFpzLDZF8YYOcTJJDPBnzMtLCDWS.jpg',	'2023-06-07 153831',	'2023-06-07 153831',	101),
+(20,	'imagesqz37JsPNV1YZAHoGgbdtZg1T6Fv1apeMZTRGQvcl.jpg',	'2023-06-07 153831',	'2023-06-07 153831',	101),
+(21,	'imageskxPuovrM3A3Xld7Tp3yX58EwBBBZVuE8AXwuG86B.jpg',	'2023-06-07 153831',	'2023-06-07 153831',	101),
+(22,	'images76FRSTRChBKDt1ngelYs0R04SovuMw53gPpyWw7t.jpg',	'2023-06-07 153849',	'2023-06-07 153849',	102),
+(23,	'imagesQ2HYIQZ9clMcJSFZtKKw9VsODaLadYX61kVc4OoE.jpg',	'2023-06-07 153849',	'2023-06-07 153849',	102),
+(24,	'imagesbOUl0v0enAsReXZQlMUGkNHLoJVbbjsQBgmwy6Fv.jpg',	'2023-06-07 153849',	'2023-06-07 153849',	102),
+(25,	'imagesUI8soBrPhbL1BDj0NuVdteh242NQWTv6r1Iq8kKm.jpg',	'2023-06-07 153912',	'2023-06-07 153912',	116),
+(26,	'imagesyTEcTY3KI5r8MtBEKXZFPpZGcy1vMSzOvWYB4CLF.jpg',	'2023-06-07 153912',	'2023-06-07 153912',	116),
+(27,	'imagesOv1W2ez1gR83GtEsgYJnCJkWhuXBELvm6OD29s1F.jpg',	'2023-06-07 153912',	'2023-06-07 153912',	116),
+(28,	'imagespTGVxWUIMD4wFG7XvdCvddWUqPEL4yx5JYgoChzj.jpg',	'2023-06-07 153927',	'2023-06-07 153927',	117),
+(29,	'images1XWP00arpve5DoDuGrU0OyPJ6xbKJw2xkiccXzj4.jpg',	'2023-06-07 153927',	'2023-06-07 153927',	117),
+(30,	'images2wKcVOhMKPImLVlsATVOX2pZVh2KwhN4Da1RJl8N.jpg',	'2023-06-07 153927',	'2023-06-07 153927',	117),
+(31,	'imagesCnlBdPTNf4Ku4qKlLlbCk6eKGPmy07eaMYIVGzGj.jpg',	'2023-06-07 153942',	'2023-06-07 153942',	118),
+(32,	'imagesqVTUXmTiL4s3DBRUW6P3JyzMBgKTmbsvbXd654zw.jpg',	'2023-06-07 153942',	'2023-06-07 153942',	118),
+(33,	'imagesKW4EZcfyHFOE2Md7yv4rNE8d6DhTUcVjCipTddSO.jpg',	'2023-06-07 153942',	'2023-06-07 153942',	118),
+(34,	'imagesOIYicMkpnVcD69sSvbPtnROXrF7ZCXth08YkA8fh.jpg',	'2023-06-07 154010',	'2023-06-07 154010',	148),
+(35,	'imagesMo8ZwwAwmrTvMfUVdIe6ZuBr7WmLKqDW5VKjjTXL.jpg',	'2023-06-07 154010',	'2023-06-07 154010',	148),
+(36,	'images1XtBQc0NhE7PHjgVf7Ix9ZMdIXtv3bHjlVqkdXij.jpg',	'2023-06-07 154010',	'2023-06-07 154010',	148),
+(37,	'imageslhhl7mPidF677BFfXRMJa5TGR8SgYwRyxJ20PRKU.jpg',	'2023-06-07 154030',	'2023-06-07 154030',	149),
+(38,	'imagesHKrvk6lsJ0S2VGvP8APm3F1xie4Y9goaEYrEeYPR.jpg',	'2023-06-07 154030',	'2023-06-07 154030',	149),
+(39,	'imagesv00Y2FNd8igFBDuaB0XtD94C3lDqD6Fw7cChmOY9.jpg',	'2023-06-07 154030',	'2023-06-07 154030',	149),
+(40,	'imagesNS2r53zPbtTguMZAxOI3I5Ew1AODxYwJmnsqOI7D.jpg',	'2023-06-07 154043',	'2023-06-07 154043',	150),
+(41,	'imagesSmRGH5sM3cM8NyStFxKY7LSq9XPeBRxfCQQAriaw.jpg',	'2023-06-07 154043',	'2023-06-07 154043',	150),
+(42,	'imagesESSQuNyw8ZB5ce0LLsq845snz7w2dvLozka9vUx9.jpg',	'2023-06-07 154043',	'2023-06-07 154043',	150),
+(43,	'imagesqujvJt6a4FEbIlSWNKdr4mnxuDtQBlDcZw13ew2n.jpg',	'2023-06-07 154058',	'2023-06-07 154058',	152),
+(44,	'imagesN7GpHhOBDQtfSpkBolLJRE1cQYGURQVveUMbBnX1.jpg',	'2023-06-07 154058',	'2023-06-07 154058',	152),
+(45,	'imagesPC6rDtTGmZgn4VFm0hTvlfmZmTbaZZcJ7DzdrKzm.jpg',	'2023-06-07 154058',	'2023-06-07 154058',	152),
+(46,	'imagesagZnXm2CXFBYhSa6Pn4CvH0V96HQCJgaZOWwTeaV.jpg',	'2023-06-07 154115',	'2023-06-07 154115',	151),
+(47,	'images6EvG8ISQldNeBUy83nXO5NTT19g5FHC5PTGdmMQT.jpg',	'2023-06-07 154115',	'2023-06-07 154115',	151),
+(48,	'imagesWjT4ekeg66aAuAgZBh5tgloHT59e6rSeS365HagW.jpg',	'2023-06-07 154115',	'2023-06-07 154115',	151),
+(49,	'imagesHBe8PRnbiUjOX1J2TvArxBzdxGcQQxolBl7D7Voe.jpg',	'2023-06-07 154135',	'2023-06-07 154135',	153),
+(50,	'imagesrQDPTrKvCvEAtN1fkelz7JG0vQJy0cGpDGrNNe7p.jpg',	'2023-06-07 154135',	'2023-06-07 154135',	153),
+(51,	'images97jf02NdSdR0kNlIKxag9jEyDmfoYMASzI62TMWW.jpg',	'2023-06-07 154135',	'2023-06-07 154135',	153),
+(52,	'imagesbUxgwWWXQyapR3C8Wj7w9wMlat65UKY07VXm8Mbh.jpg',	'2023-06-07 154151',	'2023-06-07 154151',	154),
+(53,	'imagesLOLxsV9A03Ylh1BYKI00Xc0aI65sjAcKbXVFyAo9.jpg',	'2023-06-07 154151',	'2023-06-07 154151',	154),
+(54,	'imagesPsvFOn2j3ysT1Drdc1ikf83BltK5ECPLM30xjfBy.jpg',	'2023-06-07 154151',	'2023-06-07 154151',	154),
+(55,	'imageseUBP30iwxXcD1lZ8sWLKBAsw5SJyQtBfUoSXoMMW.jpg',	'2023-06-07 154207',	'2023-06-07 154207',	155),
+(56,	'imagestJeGn635rttwRHZqDJAssP8YfV9FVkPqrZrEfhCO.jpg',	'2023-06-07 154207',	'2023-06-07 154207',	155),
+(57,	'images0R1PMnaTSSTX2Kcvz06h3vOuvkjiLJS9fRDIDKSc.jpg',	'2023-06-07 154207',	'2023-06-07 154207',	155),
+(58,	'images1E7aznFmfjJ8i05Xr6WSr1cgbPYZWx2pldxfVMGi.jpg',	'2023-06-07 154233',	'2023-06-07 154233',	156),
+(59,	'imagesAY0vz7J5XNTWBPbNI9x3uGmKKjUZcmpmWbbt3sOk.jpg',	'2023-06-07 154233',	'2023-06-07 154233',	156),
+(60,	'imagesYtTR6YaJ8daB39aK3tfZP5pJFvgeI8w2h4oqP4Do.jpg',	'2023-06-07 154233',	'2023-06-07 154233',	156),
+(61,	'imagesi54Ke9mf6b24twg3VTyPlKo8YuDLgCqx52jNXfFI.jpg',	'2023-06-07 154633',	'2023-06-07 154633',	158),
+(62,	'imagesxUphz4TEbXke8RzGhswE0suWZAwySTPwT6JFQiDm.jpg',	'2023-06-07 154633',	'2023-06-07 154633',	158),
+(63,	'imagesinxmp984JyKKj0rAYlV7HUBCVjlbJ09EADmQuDkc.jpg',	'2023-06-07 154633',	'2023-06-07 154633',	158),
+(64,	'imagesax1VH8GcAZAiHJJa5v0vgJ5pl7oMwwFg9QrEBKOT.jpg',	'2023-06-07 154648',	'2023-06-07 154648',	157),
+(65,	'imagesFIfI5YONNyyZPGUiQl09Txw1vXFPUYfR5SjYbrXX.jpg',	'2023-06-07 154648',	'2023-06-07 154648',	157),
+(66,	'imagesUSx2CtY4e40HA7r7jguLiu7bAnZ8sADGrqz7uT7d.jpg',	'2023-06-07 154648',	'2023-06-07 154648',	157),
+(67,	'imagesyO4q2dcFTy8U2lLhAr3XDn8YNugNVkqCbfjks2ug.jpg',	'2023-06-07 154831',	'2023-06-07 154831',	159),
+(68,	'imagesiOH2CwPvfazOOO9ea3nqPwbza8Bb50q5anZtIypx.jpg',	'2023-06-07 154831',	'2023-06-07 154831',	159),
+(69,	'imagesFBNepBut9SsLd3Rwb0fm5cOokMhFDZZgjJDH3bF1.jpg',	'2023-06-07 154831',	'2023-06-07 154831',	159),
+(70,	'imagesmRi9ARB1huqAFEf54UceCBC10UxEd9tnkupq3j7b.jpg',	'2023-06-07 154843',	'2023-06-07 154843',	160),
+(71,	'imagesDNY1YZCXN8OmFRgGwQYaP28B1sfyYDP4gkVkusVM.jpg',	'2023-06-07 154843',	'2023-06-07 154843',	160),
+(72,	'imagesGyTnt9P8wsEXcFN3W5Uvf2umXn4yBZnuZoTe4ZE5.jpg',	'2023-06-07 154843',	'2023-06-07 154843',	160),
+(73,	'imagesnTkRn8bjaL59OzxNMpCMNAPojFbObY42x5qnKphA.jpg',	'2023-06-07 154854',	'2023-06-07 154854',	161),
+(74,	'images4oYLpWqoNPcoDs4eVWAoAx17JYTcOElFRFGbtnpZ.jpg',	'2023-06-07 154854',	'2023-06-07 154854',	161),
+(75,	'imagesFz97zqbinB7hhtBc79fVBvRMpt4uv1wXGxbpIBKj.jpg',	'2023-06-07 154854',	'2023-06-07 154854',	161),
+(76,	'imagesqb1en8dUsUWWbTkNn0jJ79Jw1D11xXZ1DmzrZNmP.jpg',	'2023-06-07 154910',	'2023-06-07 154910',	162),
+(77,	'imagesa5FwLSIrUNglXhpHenf8PT5J8WLt4EI4qpmzgv4C.jpg',	'2023-06-07 154910',	'2023-06-07 154910',	162),
+(78,	'imagesyiU6dynoHS4cmHpWY2FHCVj57pJVV1c3FTi53TWm.jpg',	'2023-06-07 154910',	'2023-06-07 154910',	162),
+(79,	'imageswgooK6AOfzTN2gJBWyfsUPMCLV7nJo4EfKAxLo14.jpg',	'2023-06-07 154926',	'2023-06-07 154926',	163),
+(80,	'imagesdITjfJodd7rX2dwZ2zsGIjtMqmR4p8XwdiUE0M7T.jpg',	'2023-06-07 154926',	'2023-06-07 154926',	163),
+(81,	'imagesWoZWEUoZcnD42MXpQpDWesRb0xficws4QFaCdIZd.jpg',	'2023-06-07 154926',	'2023-06-07 154926',	163),
+(82,	'imagesH6EskWKJjEBaNCo88r4lOxzs09mpE3ZbkquFt1Wo.jpg',	'2023-06-07 154942',	'2023-06-07 154942',	164),
+(83,	'imagesUxs6dC0HHSPa5vzKP8W43hDYSNYB6BrYItnQJWl3.jpg',	'2023-06-07 154942',	'2023-06-07 154942',	164),
+(84,	'images8wutlduQZeERUiKObnEQeQ0WsnNJUsdrdyAxktmN.jpg',	'2023-06-07 154942',	'2023-06-07 154942',	164),
+(85,	'images9fMrwgek2VJ7pts5EeLKmLY4rW9OULtHD314oTyT.jpg',	'2023-06-07 154957',	'2023-06-07 154957',	165),
+(86,	'imagescCYS1X7sFLh3FQmbZTltZKGSsPEAX41Fm8JTBJat.jpg',	'2023-06-07 154957',	'2023-06-07 154957',	165),
+(87,	'imagespobnVlszUOvAH2KfyTEj8Ltq1jYvPsULh3GqVAPG.jpg',	'2023-06-07 154957',	'2023-06-07 154957',	165),
+(88,	'imagesj0xaAeN30H7r8LFwhBTKwJ8zXtSfhlQvhhDZUp1H.jpg',	'2023-06-07 155057',	'2023-06-07 155057',	167),
+(89,	'imagesSSzhhGuSRhPuoSE0myEotKZo2EbIJHfd1DWQAW5a.jpg',	'2023-06-07 155057',	'2023-06-07 155057',	167),
+(90,	'imagesiU5ZDDxYiGtq8rdg9yhepS0don7P6rBncEUm69cv.jpg',	'2023-06-07 155057',	'2023-06-07 155057',	167),
+(91,	'imagesQCTX3qHXqJRQapfHbo2EYd0tBcCSC0kjrSlTnIy8.jpg',	'2023-06-07 155107',	'2023-06-07 155107',	169),
+(92,	'imagesP1L9C4HOlfVjDLvCdvEwFHIpGwMX9pddkKilVReg.jpg',	'2023-06-07 155107',	'2023-06-07 155107',	169),
+(93,	'imagesW6xvw76NbCwFJnC30t8yVpDInt8PIYHFtNgdV9n5.jpg',	'2023-06-07 155107',	'2023-06-07 155107',	169),
+(94,	'imagesuE7M2LeAQK5PaBctA0wkuU3rnI0DMH975prkqDvb.jpg',	'2023-06-07 155116',	'2023-06-07 155116',	168),
+(95,	'imagesLqxKuH3Z9hrJzIDhDC9XRjGtCyIoIdI4TSNnWtl5.jpg',	'2023-06-07 155116',	'2023-06-07 155116',	168),
+(96,	'imagesFXYxS3agW9IyazWqENPgmYKUYWOMzKaknZ7s37iK.jpg',	'2023-06-07 155116',	'2023-06-07 155116',	168),
+(97,	'images2VPybHfkML1gBcepQxD9G9n0Qo2EK715PeBTqD2C.jpg',	'2023-06-07 155205',	'2023-06-07 155205',	166),
+(98,	'imagesHteBKdxkqtJLUlhwqw7SbKBZmpviSs9IgSuKKSji.jpg',	'2023-06-07 155205',	'2023-06-07 155205',	166),
+(99,	'imagesNjnZUAaLHJFd5r2MR7IQ2VKa88CeTke8Hz5r6lvx.jpg',	'2023-06-07 155205',	'2023-06-07 155205',	166);
+
+DROP TABLE IF EXISTS `item_tags`;
+CREATE TABLE `item_tags` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `item_id` bigint unsigned NOT NULL,
+  `tag_id` bigint unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `item_tag_item_idx` (`item_id`),
+  KEY `item_tag_tag_idx` (`tag_id`),
+  CONSTRAINT `item_tags_item_id_foreign` FOREIGN KEY (`item_id`) REFERENCES `items` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `item_tags_tag_id_foreign` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `item_tags` (`id`, `item_id`, `tag_id`, `created_at`, `updated_at`) VALUES
+(1,	97,	1,	NULL,	NULL),
+(2,	97,	11,	NULL,	NULL),
+(3,	97,	28,	NULL,	NULL),
+(4,	98,	1,	NULL,	NULL),
+(5,	98,	8,	NULL,	NULL),
+(6,	99,	1,	NULL,	NULL),
+(7,	99,	11,	NULL,	NULL),
+(8,	100,	1,	NULL,	NULL),
+(9,	100,	7,	NULL,	NULL),
+(10,	101,	1,	NULL,	NULL),
+(11,	101,	5,	NULL,	NULL),
+(12,	102,	1,	NULL,	NULL),
+(13,	102,	9,	NULL,	NULL),
+(14,	116,	1,	NULL,	NULL),
+(15,	116,	6,	NULL,	NULL),
+(16,	117,	1,	NULL,	NULL),
+(17,	117,	12,	NULL,	NULL),
+(18,	118,	1,	NULL,	NULL),
+(19,	118,	6,	NULL,	NULL),
+(20,	148,	1,	NULL,	NULL),
+(21,	148,	4,	NULL,	NULL),
+(22,	149,	1,	NULL,	NULL),
+(23,	149,	8,	NULL,	NULL),
+(24,	150,	1,	NULL,	NULL),
+(25,	150,	13,	NULL,	NULL),
+(26,	151,	1,	NULL,	NULL),
+(27,	151,	9,	NULL,	NULL),
+(28,	152,	1,	NULL,	NULL),
+(29,	152,	13,	NULL,	NULL),
+(30,	153,	1,	NULL,	NULL),
+(31,	153,	10,	NULL,	NULL),
+(32,	154,	1,	NULL,	NULL),
+(33,	154,	18,	NULL,	NULL),
+(34,	155,	1,	NULL,	NULL),
+(35,	155,	13,	NULL,	NULL),
+(36,	156,	1,	NULL,	NULL),
+(37,	156,	9,	NULL,	NULL),
+(38,	157,	1,	NULL,	NULL),
+(39,	157,	15,	NULL,	NULL),
+(40,	158,	1,	NULL,	NULL),
+(41,	158,	13,	NULL,	NULL),
+(42,	159,	1,	NULL,	NULL),
+(43,	159,	13,	NULL,	NULL),
+(44,	160,	1,	NULL,	NULL),
+(45,	160,	9,	NULL,	NULL),
+(46,	161,	1,	NULL,	NULL),
+(47,	161,	3,	NULL,	NULL),
+(48,	162,	1,	NULL,	NULL),
+(49,	162,	10,	NULL,	NULL),
+(50,	163,	1,	NULL,	NULL),
+(51,	163,	5,	NULL,	NULL),
+(52,	164,	1,	NULL,	NULL),
+(53,	164,	11,	NULL,	NULL),
+(54,	165,	1,	NULL,	NULL),
+(55,	165,	8,	NULL,	NULL),
+(56,	166,	1,	NULL,	NULL),
+(57,	166,	12,	NULL,	NULL),
+(58,	167,	1,	NULL,	NULL),
+(59,	167,	9,	NULL,	NULL),
+(60,	168,	1,	NULL,	NULL),
+(61,	168,	11,	NULL,	NULL),
+(62,	169,	1,	NULL,	NULL),
+(63,	169,	2,	NULL,	NULL);
+
+DROP TABLE IF EXISTS `items`;
+CREATE TABLE `items` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` int NOT NULL,
+  `quantity` int NOT NULL,
+  `type` smallint unsigned NOT NULL,
+  `seller_id` bigint unsigned NOT NULL,
+  `category_id` bigint unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `item_seller_idx` (`seller_id`),
+  KEY `item_category_idx` (`category_id`),
+  CONSTRAINT `items_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `items_seller_id_foreign` FOREIGN KEY (`seller_id`) REFERENCES `sellers` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `items` (`id`, `title`, `description`, `content`, `price`, `quantity`, `type`, `seller_id`, `category_id`, `created_at`, `updated_at`) VALUES
+(97,	'Çimento',	'Yüksek dayanıklılığa sahip 50 kg çimento çuvalı.',	'Marka XYZrnSınıf Tip 52.5rnAmbalaj Çuval',	100,	100,	1,	5,	1,	NULL,	'2023-06-07 150156'),
+(98,	'Kireç',	'Doğal beyaz kireç tozu, 25 kg paket içerisinde.',	'Saflık %95rnAmbalaj Paket',	50,	50,	1,	6,	1,	NULL,	'2023-06-07 153744'),
+(99,	'İzolasyon Bandı',	'Su geçirmez izolasyon bandı, 5 cm x 10 m ölçülerinde.',	'Renk SiyahrnKalınlık 0.5 mmrnUygulama Dış mekan',	20,	200,	4,	8,	7,	NULL,	'2023-06-07 153759'),
+(100,	'Kaplama Tahtası',	'12 mm kalınlığında 60x120 cm MDF kaplama tahtası.',	'Renk BeyazrnYüzey DüzrnKullanım Alanı İç mekan',	80,	50,	4,	10,	8,	NULL,	'2023-06-07 153812'),
+(101,	'Elektrik Kablosu',	'3x2.5 mm² kesitli 100 metre uzunluğunda elektrik kablosu.',	'Kullanım İç mekanrnStandart TS EN 50525',	150,	30,	6,	11,	3,	NULL,	'2023-06-07 153831'),
+(102,	'Vida',	'4x40 mm ölçülerinde paslanmaz çelik vida.',	'Malzeme Paslanmaz çelikrnKafa Tipi Yuvarlak',	2,	500,	4,	7,	4,	NULL,	'2023-06-07 153849'),
+(116,	'Su Arıtma Filtresi',	'Ev tipi su arıtma filtresi, 5 aşamalı temizleme sistemi.',	'Aşamalar Sediment, karbon, ters osmoz, UV, mineral',	300,	10,	4,	8,	9,	NULL,	NULL),
+(117,	'Çatı Kaplama Malzemesi',	'Siyah renk bitümlü çatı kaplama membranı, 1 mm kalınlık.',	'Uygulama Sıcak havadarnRulo Uzunluğu 10 m',	80,	20,	4,	9,	10,	NULL,	'2023-06-07 153927'),
+(118,	'PVC Boru',	'50 mm çapında 5 metre uzunluğunda PVC boru.',	'Malzeme Yüksek yoğunluklu PVCrnRenk Beyaz',	30,	40,	6,	7,	9,	NULL,	'2023-06-07 153942'),
+(148,	'Bahçe Çiti',	'Yeşil renkli tel örgü bahçe çiti, 1 metre yükseklikte.',	'Malzeme Galvanizli çelikrnAksesuarlar dahil',	25,	60,	4,	9,	6,	NULL,	'2023-06-07 154010'),
+(149,	'Duvar Boyası',	'10 litre beyaz iç cephe mat duvar boyası.',	'Kullanım İç mekanrnYüzey Beton, alçı, sıva',	120,	15,	5,	10,	2,	NULL,	'2023-06-07 154030'),
+(150,	'Tavizsiz Civata',	'M10x30 mm boyutunda paslanmaz çelik tavizsiz civata.',	'Malzeme Paslanmaz çelikrnDişli Tam',	5,	200,	4,	8,	4,	NULL,	'2023-06-07 154043'),
+(151,	'Seramik Karo',	'30x30 cm boyutunda gri renk seramik zemin karo.',	'Kullanım İç mekanrnYüzey Mat',	25,	100,	4,	11,	11,	NULL,	'2023-06-07 154115'),
+(152,	'Yapıştırma Harcı',	'12 kg gri renkli seramik yapıştırma harcı.',	'Kullanım İç ve dış mekanrnSu ile karıştırılır',	50,	30,	1,	6,	5,	NULL,	'2023-06-07 154058'),
+(153,	'İskele',	'Yükseklik ayarlı çelik iskele, 150 kg taşıma kapasitesi.',	'Yükseklik Aralığı 1.5-2.5 mrnMalzeme Galvanizli çelik',	500,	5,	4,	10,	13,	NULL,	'2023-06-07 154135'),
+(154,	'Kask',	'Sarı renk inşaat kaskı, sert plastik malzemeden üretilmiştir.',	'Sertifikasyon CE EN 397rnAğırlık 400 gr',	30,	50,	4,	8,	14,	NULL,	'2023-06-07 154151'),
+(155,	'Fayans Kesme Makinesi',	'El tipi fayans kesme makinesi, 600 mm kesme uzunluğu.',	'Kesme Açısı 0-45 derecernKullanım İç ve dış mekan',	250,	8,	4,	6,	12,	NULL,	'2023-06-07 154207'),
+(156,	'Tüp Anahtarı Seti',	'8 parça tüp anahtarı seti, krom vanadyum çelik malzemeden üretilmiştir.',	'Boyutlar 8-22 mmrnKullanım Otomotiv, hırdavat',	100,	15,	4,	7,	4,	NULL,	'2023-06-07 154233'),
+(157,	'Hidrolik Delici',	'3 HP hidrolik delici, 100 mm delme kapasitesi.',	'Motor Gücü 3 HPrnDelme Derinliği 100 mm',	1500,	2,	4,	11,	13,	NULL,	'2023-06-07 154648'),
+(158,	'Mermer Kesme Testeresi',	'400 mm çapında mermer kesme testeresi, 2.2 kW motor gücü.',	'Motor Gücü 2.2 kWrnKesme Kapasitesi 45° eğimli',	2000,	3,	4,	5,	13,	NULL,	'2023-06-07 154633'),
+(159,	'Su Pompası',	'Çift emişli su pompası, 2 HP motor gücü.',	'Motor Gücü 2 HPrnDebi Kapasitesi 20 m³saat',	800,	5,	4,	7,	9,	NULL,	'2023-06-07 154831'),
+(160,	'Çekiç',	'500 gram ağırlığında çelik çekiç.',	'Malzeme Karbon çelikrnSap Malzemesi Ahşap',	15,	100,	4,	7,	4,	NULL,	'2023-06-07 154843'),
+(161,	'Duvar Tipi Priz',	'2lü duvar tipi priz, topraklı.',	'Akım 16ArnVoltaj 220VrnRenk Beyaz',	40,	20,	4,	11,	3,	NULL,	'2023-06-07 154854'),
+(162,	'Polisaj Makinesi',	'1500 W polisaj makinesi, 180 mm disk çapı.',	'Güç 1500 WrnHız 1000-3000 devirdakika',	300,	4,	4,	10,	8,	NULL,	'2023-06-07 154910'),
+(163,	'Kum',	'Yapı malzemelerinde kullanılan doğal kum, 25 kg paket içerisinde.',	'Kullanım İnşaat, harçrnBirim Kilogram',	10,	200,	1,	5,	1,	NULL,	'2023-06-07 154926'),
+(164,	'Fugalı Seramik',	'Beyaz renkli fugalı seramik, 2 kg paket içerisinde.',	'Renk BeyazrnKullanım İç ve dış mekan',	30,	40,	4,	8,	11,	NULL,	'2023-06-07 154942'),
+(165,	'Silikon Mastik',	'Hava şartlarına dayanıklı beyaz silikon mastik, 300 ml kartuş içerisinde.',	'Uygulama İç ve dış mekanrnKullanım Duvar, cam, seramik',	15,	50,	5,	8,	5,	NULL,	'2023-06-07 154957'),
+(166,	'El Alet Seti',	'50 parça el alet seti, çeşitli tornavida, pense, anahtarlar içerir.',	'Malzeme Krom vanadyum çelikrnKullanım Ev, hobi',	200,	5,	4,	7,	12,	NULL,	'2023-06-07 155205'),
+(167,	'Çatı Lambası',	'E27 soketli alüminyum çatı lambası, su geçirmez.',	'Güç 60WrnMalzeme AlüminyumrnKoruma Sınıfı IP65',	40,	30,	4,	9,	10,	NULL,	'2023-06-07 155057'),
+(168,	'Parke Taşı',	'10x10 cm boyutunda gri renkli parke taşı, 1 m² paket içerisinde.',	'Malzeme BetonrnKullanım Dış mekan',	50,	20,	4,	11,	11,	NULL,	'2023-06-07 155115'),
+(169,	'Süpürge',	'Elektrikli süpürge, 1600 W motor gücü.',	'Kullanım İç mekanrnToz Haznesi Kapasitesi 2 litre',	250,	8,	4,	10,	2,	NULL,	'2023-06-07 155107');
+
+DROP TABLE IF EXISTS `migrations`;
+CREATE TABLE `migrations` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(1,	'2014_10_12_000000_create_users_table',	1),
+(2,	'2014_10_12_100000_create_password_reset_tokens_table',	1),
+(3,	'2019_08_19_000000_create_failed_jobs_table',	1),
+(4,	'2019_12_14_000001_create_personal_access_tokens_table',	1),
+(5,	'2023_05_16_190834_create_categories_table',	1),
+(6,	'2023_05_16_201000_create_tags_table',	1),
+(7,	'2023_05_16_201157_create_colors_table',	1),
+(8,	'2023_05_17_024219_create_sellers_table',	2),
+(9,	'2023_05_18_054538_create_items_table',	2),
+(10,	'2023_05_18_054609_create_item_tags_table',	2),
+(11,	'2023_05_18_061813_create_buyers_table',	2),
+(12,	'2023_05_19_034119_create_images_table',	2),
+(13,	'2014_10_12_100000_create_password_resets_table',	3),
+(14,	'2023_06_07_181550_create_ordersss_table',	3);
+
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE `orders` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `items` json NOT NULL,
+  `total_price` int NOT NULL,
+  `payment_status` smallint unsigned NOT NULL DEFAULT '1',
+  `buyer_id` bigint unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `order_buyer_idx` (`buyer_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `orders` (`id`, `items`, `total_price`, `payment_status`, `buyer_id`, `created_at`, `updated_at`) VALUES
+(1,	'[{id 97, path httplocalhost8876storageimages7d5exRFuSj72SPAWUGffJdNsbr9Bkj1jN9gdMHEt.jpg, count 4, price 100, title Çimento}, {id 98, path httplocalhost8876storageimagesuTeQ7idnVmUg2OIu0KREMKPj2z3VHNyidW4c52Bz.jpg, count 3, price 50, title Kireç}]',	550,	1,	12,	'2023-06-07 212900',	'2023-06-07 212900');
+
+DROP TABLE IF EXISTS `orderssss`;
+CREATE TABLE `orderssss` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `items` bigint unsigned NOT NULL,
+  `total_price` int NOT NULL,
+  `payment_status` smallint unsigned NOT NULL DEFAULT '1',
+  `buyer_id` bigint unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `order_buyer_idx` (`buyer_id`),
+  KEY `items` (`items`),
+  CONSTRAINT `orders_buyer_id_foreign` FOREIGN KEY (`buyer_id`) REFERENCES `buyers` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `orderssss_ibfk_3` FOREIGN KEY (`items`) REFERENCES `items` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+DROP TABLE IF EXISTS `password_reset_tokens`;
+CREATE TABLE `password_reset_tokens` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+DROP TABLE IF EXISTS `password_resets`;
+CREATE TABLE `password_resets` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  KEY `password_resets_email_index` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+DROP TABLE IF EXISTS `personal_access_tokens`;
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint unsigned NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+DROP TABLE IF EXISTS `sellers`;
+CREATE TABLE `sellers` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '-',
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '-',
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '-',
+  `delivery_info` int unsigned NOT NULL DEFAULT '3',
+  `user_id` bigint unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `seller_user_idx` (`user_id`),
+  CONSTRAINT `sellers_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `sellers` (`id`, `name`, `phone`, `address`, `delivery_info`, `user_id`, `created_at`, `updated_at`) VALUES
+(5,	'İdeal İnşaat Malzemeleri',	'5551234567',	'İstanbul, Türkiye',	4,	3,	'2023-06-07 142256',	'2023-06-07 142256'),
+(6,	'Mega İnşaat Market',	'5559876543',	'Ankara, Türkiye',	2,	4,	'2023-06-07 142256',	'2023-06-07 142256'),
+(7,	'Hızlı Hırdavat',	'5555555555',	'İzmir, Türkiye',	3,	5,	'2023-06-07 142256',	'2023-06-07 142256'),
+(8,	'Kimya Dünyası',	'5551112222',	'Bursa, Türkiye',	1,	6,	'2023-06-07 142256',	'2023-06-07 142256'),
+(9,	'Yeşil Bahçe Market',	'5554443333',	'Antalya, Türkiye',	5,	7,	'2023-06-07 142256',	'2023-06-07 142256'),
+(10,	'Evim İç Mimarlık',	'5556667777',	'Adana, Türkiye',	3,	8,	'2023-06-07 142256',	'2023-06-07 142256'),
+(11,	'Elektro World',	'5552228888',	'İzmit, Türkiye',	2,	9,	'2023-06-07 142256',	'2023-06-07 142256'),
+(12,	'Doga Market',	'5551284467',	'Kayseri, Turkiye',	3,	11,	'2023-06-07 142525',	'2023-06-07 142525');
+
+DROP TABLE IF EXISTS `tags`;
+CREATE TABLE `tags` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `tags` (`id`, `title`, `created_at`, `updated_at`) VALUES
+(1,	'Yapı Malzemeleri',	NULL,	NULL),
+(2,	'Ev Tamiri',	NULL,	NULL),
+(3,	'İç Dekorasyon',	NULL,	NULL),
+(4,	'Bahçe Bakımı',	NULL,	NULL),
+(5,	'Elektrik İşleri',	NULL,	NULL),
+(6,	'Su Tesisatı',	NULL,	NULL),
+(7,	'Marangozluk',	NULL,	NULL),
+(8,	'Boya ve Kaplama',	NULL,	NULL),
+(9,	'Hırdavat',	NULL,	NULL),
+(10,	'İnşaat Ekipmanları',	NULL,	NULL),
+(11,	'Yalıtım Malzemeleri',	NULL,	NULL),
+(12,	'Çatı ve Cephe',	NULL,	NULL),
+(13,	'Zemin Kaplamaları',	NULL,	NULL),
+(14,	'Mobilya Montajı',	NULL,	NULL),
+(15,	'Aydınlatma',	NULL,	NULL),
+(16,	'İnşaat Projesi',	NULL,	NULL),
+(17,	'Yapı Denetimi',	NULL,	NULL),
+(18,	'İş Güvenliği',	NULL,	NULL),
+(19,	'Peyzaj Tasarımı',	NULL,	NULL),
+(20,	'Sıhhi Tesisat',	NULL,	NULL),
+(21,	'Yapı İşçiliği',	NULL,	NULL),
+(22,	'Enerji Verimliliği',	NULL,	NULL),
+(23,	'Mobilya Boyama',	NULL,	NULL),
+(24,	'Duvar Kaplama',	NULL,	NULL),
+(25,	'Yapı Onarımı',	NULL,	NULL),
+(26,	'Yüzey Hazırlığı',	NULL,	NULL),
+(27,	'Yapı Sistemleri',	NULL,	NULL),
+(28,	'Beton İşleri',	NULL,	NULL),
+(29,	'Merdiven İşleri',	NULL,	NULL),
+(30,	'Çatı Onarımı',	NULL,	NULL);
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role` smallint unsigned NOT NULL DEFAULT '1',
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `users` (`id`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1,	'laravel@mail.en',	NULL,	'heyyo1234',	3,	NULL,	'2023-06-07 140854',	'2023-06-07 140854'),
+(2,	'sema@gmail.com',	NULL,	'heyyo1234',	1,	NULL,	'2023-06-07 140934',	'2023-06-07 140934'),
+(3,	'john@example.com',	NULL,	'heyyo123',	2,	NULL,	'2023-06-07 141054',	'2023-06-07 141054'),
+(4,	'emma@example.com',	NULL,	'heyyo123',	2,	NULL,	'2023-06-07 141054',	'2023-06-07 141054'),
+(5,	'mike@example.com',	NULL,	'heyyo123',	2,	NULL,	'2023-06-07 141054',	'2023-06-07 141054'),
+(6,	'sarah@example.com',	NULL,	'heyyo123',	2,	NULL,	'2023-06-07 141054',	'2023-06-07 141054'),
+(7,	'david@example.com',	NULL,	'heyyo123',	2,	NULL,	'2023-06-07 141054',	'2023-06-07 141054'),
+(8,	'ali@example.com',	NULL,	'heyyo123',	2,	NULL,	'2023-06-07 141054',	'2023-06-07 141054'),
+(9,	'peter@example.com',	NULL,	'heyyo123',	2,	NULL,	'2023-06-07 141054',	'2023-06-07 141054'),
+(10,	'julia@example.com',	NULL,	'heyyo123',	1,	NULL,	'2023-06-07 141054',	'2023-06-07 141054'),
+(11,	'alex@example.com',	NULL,	'heyyo123',	2,	NULL,	'2023-06-07 141054',	'2023-06-07 141054'),
+(12,	'olivia@example.com',	NULL,	'heyyo123',	1,	NULL,	'2023-06-07 141054',	'2023-06-07 141054'),
+(13,	'semahatartikova@gmail.comm',	NULL,	'$2y$10$.O.okH82Rpurxn.LecTbXu49EGOXuEmSZatrsrSFpos6nuidxYuu',	1,	NULL,	'2023-06-07 204743',	'2023-06-07 204743'),
+(15,	'semahatartikova@gmail.coml',	NULL,	'$2y$10$ng.F17hs3N8KsMRPsMRo.OxH1ISOSvzNJ3vOYxbstxgU9GbFnN8MW',	1,	NULL,	'2023-06-07 205117',	'2023-06-07 205117'),
+(16,	'semahatartikova@gmail.com',	NULL,	'$2y$10$lKZht3fus3RNBl5S3CaDzudLBDnfSCqtBh6HGIoT5tRM1zSO.YmG',	1,	NULL,	'2023-06-07 205259',	'2023-06-07 205259'),
+(17,	'semahatartikova@gmail.coms',	NULL,	'$2y$10$WneigWC41ivuZYuOQ3rtT.AnautClULL2.hqVQUuzv1EGKVV9IDzW',	1,	NULL,	'2023-06-07 205651',	'2023-06-07 205651'),
+(18,	'semahatartikovaa@gmail.com',	NULL,	'$2y$10$jFleV14TpWNAwEHPv7kuS.oTOW38lW.HJXC8aWnMFz1FS52lla4G',	1,	NULL,	'2023-06-07 210119',	'2023-06-07 210119'),
+(19,	'semahatasrtikova@gmail.com',	NULL,	'$2y$10$N4tCxktBXBPIgd8S06kq8.L9wrLG23Fl.tJXt1jaagc4SaEaInaQa',	1,	NULL,	'2023-06-07 210657',	'2023-06-07 210657'),
+(20,	'seova@gmail.com',	NULL,	'$2y$10$KpGUB0jU0HDS1WGg8kmjGO7rFHWr.N8UN2zDgKULKU5cdRPi6H0Lq',	1,	NULL,	'2023-06-07 211003',	'2023-06-07 211003'),
+(21,	'ssaa@gmail.com',	NULL,	'$2y$10$WM.9Sl68hNvk3LSbWAshQe94OL2tS.1qhqLGltTRzTmvJqetab8X2',	1,	NULL,	'2023-06-07 211148',	'2023-06-07 211148'),
+(22,	'aradva@gmail.com',	NULL,	'$2y$10$8vsw6LKFHXsAshRfqdyQeSLEFffqhDxCzCLHOtvVkRuVMZuhZyie',	1,	NULL,	'2023-06-07 212900',	'2023-06-07 212900');
+
+-- 2023-06-08 081346
